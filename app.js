@@ -27,8 +27,10 @@ var controller = (function(budgetCtrl, UICtrl) {
     });
 
     document.addEventListener('keypress', function(event) {
-        console.log('keyd pressed!');
-        console.log(event);
+       if (event.keyCode === 13 || event.which === 13) {
+           console.log('Enter');
+           console.log(event.keyCode);
+       }
     })
 
 })(budgetController,UIController);
