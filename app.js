@@ -9,7 +9,8 @@ var UIController = (function() {
    var DOMStrings = {
        inputType: '.add__type',
        inputDescription: '.add__description',
-       inputValue: '.add__value' 
+       inputValue: '.add__value',
+       inputBtn: '.add__btn', 
    } 
    
     return {
@@ -18,7 +19,11 @@ var UIController = (function() {
                 type: document.querySelector(DOMStrings.inputType).value, 
                 description: document.querySelector(DOMStrings.inputDescription).value,
                 value: document.querySelector(DOMStrings.inputValue).value,
-            }   
+            };   
+        },
+
+        getDOMStrings: function() {
+            return DOMStrings;
         }
    }
 
@@ -26,6 +31,8 @@ var UIController = (function() {
 
 // GLOBAL APP CONTROLLER
 var controller = (function(budgetCtrl, UICtrl) {
+
+    var DOM = UIController.getDOMStrings();
 
     var ctrlAddItem = function() {
 
@@ -44,7 +51,7 @@ var controller = (function(budgetCtrl, UICtrl) {
 
 }
 
-    document.querySelector('.add__btn').addEventListener('click', ctrlAddItem);
+    document.querySelector(DOM.inputBtn).addEventListener('click', ctrlAddItem);
   
     document.addEventListener('keypress', function(event) {
        if (event.keyCode === 13 || event.which === 13) {
