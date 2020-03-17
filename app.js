@@ -14,7 +14,21 @@ var UIController = (function() {
 var controller = (function(budgetCtrl, UICtrl) {
 
     document.querySelector('.add__btn').addEventListener('click', function() {
-        console.log('hi')
+       
+        // 1. get user input
+        
+        // 2. add the item to the budget controller
+
+        // 3. add the item to the UI
+        
+        // 4. calculate the budget
+
+        //  5. display the budget on the UI
     });
+
+    document.addEventListener('keypress', function(event) {
+        console.log('keyd pressed!');
+        console.log(event);
+    })
 
 })(budgetController,UIController);
