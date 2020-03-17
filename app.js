@@ -6,16 +6,27 @@ var budgetController = (function() {
 // UI CONTROLLER
 var UIController = (function() {
     
-    // some code
+   return {
+       getInput: function() {
+            return {
+                type: document.querySelector('.add__type').value, 
+                description: document.querySelector('.add__description').value,
+                value: document.querySelector('.add__value').value,
+            }   
+        }
+   }
 
 })();
 
 // GLOBAL APP CONTROLLER
 var controller = (function(budgetCtrl, UICtrl) {
 
-    document.querySelector('.add__btn').addEventListener('click', function() {
-       
+    var ctrlAddItem = function() {
+
         // 1. get user input
+        var input = UIController.getInput();
+        console.log(input.value);
+       
         
         // 2. add the item to the budget controller
 
@@ -24,13 +35,15 @@ var controller = (function(budgetCtrl, UICtrl) {
         // 4. calculate the budget
 
         //  5. display the budget on the UI
-    });
 
+}
+
+    document.querySelector('.add__btn').addEventListener('click', ctrlAddItem);
+  
     document.addEventListener('keypress', function(event) {
        if (event.keyCode === 13 || event.which === 13) {
-           console.log('Enter');
-           console.log(event.keyCode);
+        ctrlAddItem();
        }
-    })
+    });
 
 })(budgetController,UIController);
