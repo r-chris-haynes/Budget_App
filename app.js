@@ -1,4 +1,4 @@
-// BUDGET CONTROLLER
+// BUDGET CONTROLLER//////////////////////////////////////////
 var budgetController = (function() {
 
     var Expense = function(id, description, value) {
@@ -21,12 +21,40 @@ var budgetController = (function() {
             exp: 0,
             inc: 0
         }
+    };
+
+    return {
+        addItem: function(type, des, val) {
+            var newItem, ID;
+
+            // create new id
+            if (data.allItems[type].length > 0) {
+                ID = data.allItems[type][data.allItems[type].length - 1].id + 1;
+            } else {
+                ID = 0;
+            }
+            
+            // create new item based on 'inc' or 'exp'
+            if (type === 'exp') {
+                newItem = new Expense(ID, des, val);
+            } else if (type === 'inc') {
+                newItem = new Income(ID, des, val);
+            }
+            // push new item into data structure
+            data.allItems[type].push(newItem);
+            
+            // return the new element
+            return newItem;
+        },
+        testing: function() {
+            console.log(data);
+        }
     }
 
 })();
 
 
-// UI CONTROLLER
+// UI CONTROLLER/////////////////////////////////////////////
 var UIController = (function() {
   var DOMStrings = {
     inputType: ".add__type",
@@ -50,7 +78,7 @@ var UIController = (function() {
   };
 })();
 
-// GLOBAL APP CONTROLLER
+// GLOBAL APP CONTROLLER////////////////////////////////////////
 var controller = (function(budgetCtrl, UICtrl) {
     
     var setupEventListeners = function() {
@@ -67,13 +95,16 @@ var controller = (function(budgetCtrl, UICtrl) {
   };
 
   var ctrlAddItem = function() {
+    var input, newItem;
+    
     // 1. get user input
-    var input = UIController.getInput();
-    console.log(input);
+    input = UIController.getInput();
 
     // 2. add the item to the budget controller
-
-    // 3. add the item to the UI
+    newItem = budgetCtrl.addItem(input.type, input.description, input.value);
+  
+    
+   // 3. add the item to the UI
 
     // 4. calculate the budget
 
